@@ -12,7 +12,12 @@ const app = express()
 
 // global middlewares
 app.use(helmet())
-app.use(cors({ origin: config.clientUrl, credentials: true }))
+app.use(
+  cors({
+    origin: process.env.environment === 'production' ? config.clientUrl : '*',
+    credentials: true,
+  })
+)
 app.use(
   rateLimit({
     windowMs: Number(config.rateLimit.window),
