@@ -46,8 +46,9 @@ const getAllUsers = async (
   const whereCondition: Prisma.UserWhereInput =
     andConditions.length > 0 ? { AND: andConditions } : {}
 
-  const orderBy: Prisma.UserOrderByWithRelationInput =
-    sortBy && sortOrder ? { [sortBy]: sortOrder } : { createdAt: 'desc' }
+  const orderBy: Prisma.UserOrderByWithRelationInput = {
+    [sortBy]: sortOrder,
+  }
 
   const [users, total] = await Promise.all([
     userRepository.findMany({
@@ -59,9 +60,9 @@ const getAllUsers = async (
     userRepository.count(whereCondition),
   ])
 
-  if (users.length === 0) {
-    throw new AppError(404, 'No users found')
-  }
+
+
+  const totalPages = Math.ceil(total / limit)
 
   return {
     data: users,
@@ -69,6 +70,7 @@ const getAllUsers = async (
       total,
       page,
       limit,
+      totalPages,
     },
   }
 }
