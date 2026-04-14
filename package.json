@@ -1,7 +1,6 @@
 {
   "name": "node-express-modular-starter",
   "version": "1.0.0",
-  "type": "module",
   "description": "A production-ready, modular, and reusable Node.js Express starter package.",
   "main": "dist/server.js",
   "scripts": {
@@ -29,6 +28,7 @@
   "author": "Mamun Hossain",
   "license": "ISC",
   "dependencies": {
+    "@prisma/adapter-pg": "^7.7.0",
     "@prisma/client": "^7.6.0",
     "bcryptjs": "^3.0.3",
     "cloudinary": "^2.9.0",
@@ -41,6 +41,7 @@
     "http-status": "^2.1.0",
     "jsonwebtoken": "^9.0.3",
     "multer": "^2.0.2",
+    "pg": "^8.20.0",
     "streamifier": "^0.1.1",
     "winston": "^3.17.0",
     "zod": "^4.3.5"
@@ -55,6 +56,7 @@
     "@types/multer": "^2.0.0",
     "@types/node": "^25.0.9",
     "@types/nodemailer": "^7.0.9",
+    "@types/pg": "^8.20.0",
     "@types/streamifier": "^0.1.2",
     "@typescript-eslint/eslint-plugin": "^8.26.0",
     "@typescript-eslint/parser": "^8.26.0",
