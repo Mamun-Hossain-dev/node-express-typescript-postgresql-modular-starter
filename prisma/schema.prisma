@@ -7,3 +7,45 @@ datasource db {
   provider = "postgresql"
 }
 
+enum Role {
+  ADMIN
+  USER
+  GUEST
+}
+
+model User {
+  id                   String    @id @default(uuid())
+  firstName            String
+  lastName             String?
+  email                String    @unique
+  password             String
+  role                 Role      @default(USER)
+  profileImage         String?
+  profileImagePublicId String?
+  bio                  String?
+  phone                String?
+  location             String?
+  otp                  String?
+  otpExpiry            DateTime?
+  verified             Boolean   @default(true)
+  isSubscribed         Boolean   @default(false)
+  posts                Post[]
+  createdAt            DateTime  @default(now())
+  updatedAt            DateTime  @updatedAt
+
+  @@map("users")
+}
+
+model Post {
+  id        String   @id @default(uuid())
+  title     String
+  content   String
+  published Boolean  @default(false)
+  authorId  String
+  author    User     @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("posts")
+}
+
